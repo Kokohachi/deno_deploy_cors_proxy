@@ -2,7 +2,10 @@ import { serve } from "https://deno.land/std@0.181.0/http/server.ts";
 import { CSS, render } from "https://deno.land/x/gfm@0.1.22/mod.ts";
 
 const black_list = [
-  "https://w-corp.staticblitz.com/"
+  {
+    "before" :"/bin_index",
+    "after": "https://fkunn1326-cors.deno.dev/https://w-corp.staticblitz.com/bin_index"
+  }
 ]
 
 function addCorsIfNeeded(response: Response) {
@@ -55,9 +58,10 @@ async function handleRequest(request: Request) {
     let restxt = await response.text();
     const headers = addCorsIfNeeded(response);
 
-    if (black_list.some((item) => {restxt.includes(item)})) {
+    if (black_list.some((item) => {restxt.includes(item["before"])})) {
       black_list.map((item) => {
-        restxt = restxt.replaceAll(item, `https://fkunn1326-cors.deno.dev/${item}`)
+        restxt = restxt.replaceAll(item["before"], item["after"])
+        console.log(restxt)
       })
       return new Response(restxt, {
         status: response.status,
