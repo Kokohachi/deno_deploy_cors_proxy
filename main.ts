@@ -35,7 +35,7 @@ async function handleRequest(request: Request) {
       return new Response(null, { headers: corsHeaders });
     }
 
-    console.log(`Header: ${JSON.stringify(request.headers)}`)
+    console.log(`Header: ${JSON.stringify(request)}`)
   
     // if (headers.has("origin")) {
     //   if (!headers.get("origin").startsWith("http")){
