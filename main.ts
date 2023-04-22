@@ -35,13 +35,13 @@ async function handleRequest(request: Request) {
       return new Response(null, { headers: corsHeaders });
     }
 
-    console.log(`Header: ${new Headers(request.headers)}`)
+    console.log(`Header: ${JSON.stringify(request.headers)}`)
   
-    if (headers.has("origin")) {
-      if (!headers.get("origin").startsWith("http")){
-        headers.set("origin", "http://localhost:3000")
-      }
-    }
+    // if (headers.has("origin")) {
+    //   if (!headers.get("origin").startsWith("http")){
+    //     headers.set("origin", "http://localhost:3000")
+    //   }
+    // }
 
     const response = await fetch(url, request);
     const headers = addCorsIfNeeded(response);
