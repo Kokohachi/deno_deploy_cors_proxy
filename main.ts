@@ -35,7 +35,7 @@ async function handleRequest(request: Request) {
       return new Response(null, { headers: corsHeaders });
     }
 
-    const reqHeaders = request.headers
+    const reqHeaders = new Headers(request.headers)
 
     if (!reqHeaders.get("origin")?.startsWith("http")){
       reqHeaders.set("origin", "http://localhost:3000")
