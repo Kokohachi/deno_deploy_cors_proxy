@@ -55,10 +55,10 @@ async function handleRequest(request: Request) {
     console.log(`Origin: ${req.headers.get("origin")}`)
 
     const response = await fetch(url, req);
-    // let restxt = 
+    let restxt = response.text()
     const headers = addCorsIfNeeded(response);
 
-    console.log(await response.text())
+    console.log(restxt)
 
     if (black_list.some((item) => {restxt.includes(item["before"])})) {
       black_list.map((item) => {
