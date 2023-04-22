@@ -58,7 +58,7 @@ async function handleRequest(request: Request) {
     let restxt = response.text()
     const headers = addCorsIfNeeded(response);
 
-    console.log(restxt)
+    console.log(await restxt)
 
     if (black_list.some((item) => {restxt.includes(item["before"])})) {
       black_list.map((item) => {
