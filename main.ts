@@ -30,11 +30,15 @@ async function handleRequest(request: Request) {
 
   if (isUrl(url)) {
     console.log("proxy to %s", url);
-    console.log(`Origin: ${request.headers.get("origin")}`)
     const corsHeaders = addCorsIfNeeded(new Response());
     if (request.method.toUpperCase() === "OPTIONS") {
       return new Response(null, { headers: corsHeaders });
     }
+
+    if (!request.headers.get("origin")?.startsWith("http")){
+      request.headers.set("origin", "http://localhost:3000")
+    }
+    console.log(`Origin: ${request.headers.get("origin")}`)
 
     const response = await fetch(url, request);
     const headers = addCorsIfNeeded(response);
