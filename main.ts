@@ -37,9 +37,13 @@ async function handleRequest(request: Request) {
 
     const req = new Request(request)
 
-    // if (!req.headers.get("origin")?.startsWith("http")){
-    //   req.headers.set("origin", "http://localhost:3000")
-    // }
+    if (!req.headers.get("origin")?.startsWith("http")){
+      req.headers.set("origin", "http://localhost:3000")
+    }
+
+    if (!req.headers.get("referer")?.startsWith("http")){
+      req.headers.set("referer", "http://localhost:3000")
+    }
 
     console.log(`Origin: ${req.headers.get("origin")}`)
 
