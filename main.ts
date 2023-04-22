@@ -1,6 +1,10 @@
 import { serve } from "https://deno.land/std@0.181.0/http/server.ts";
 import { CSS, render } from "https://deno.land/x/gfm@0.1.22/mod.ts";
 
+const black_list = [
+  "https://w-corp.staticblitz.com/"
+]
+
 function addCorsIfNeeded(response: Response) {
   const headers = new Headers(response.headers);
 
@@ -48,12 +52,25 @@ async function handleRequest(request: Request) {
     console.log(`Origin: ${req.headers.get("origin")}`)
 
     const response = await fetch(url, req);
+    let restxt = await response.text();
     const headers = addCorsIfNeeded(response);
-    return new Response(response.body, {
-      status: response.status,
-      statusText: response.statusText,
-      headers,
-    });
+
+    if (black_list.some((item) => {restxt.includes(item)})) {
+      black_list.map((item) => {
+        restxt = restxt.replaceAll(item, `https://fkunn1326-cors.deno.dev/${item}`)
+      })
+      return new Response(restxt, {
+        status: response.status,
+        statusText: response.statusText,
+        headers,
+      });
+    } else {
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers,
+      });
+    }
   }
 
   const readme = await Deno.readTextFile("./README.md");
