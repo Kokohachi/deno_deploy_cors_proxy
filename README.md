@@ -1,6 +1,6 @@
 # Deno Deploy CORS Proxy
 
-https://cors.deno.dev
+https://fkunn1326-cors.deno.dev/
 
 ## Usage
 
@@ -19,6 +19,6 @@ const response = await fetch("https://xxxx.com/api");
 After:
 
 ```js
-const response = await fetch("https://cors.deno.dev/https://xxxx.com/api");
+const response = await fetch("https://fkunn1326-cors.deno.dev/https://xxxx.com/api");
 const json = await response.json();
 ```
