@@ -4,7 +4,7 @@ import { CSS, render } from "https://deno.land/x/gfm@0.1.22/mod.ts";
 function addCorsIfNeeded(response: Response) {
   const headers = new Headers(response.headers);
 
-  console.log(`Origin: ${headers.get("origin")}`)
+  console.log(`Origin: ${JSON.stringify(headers)}`)
 
   // if (headers.has("origin")) {
   //   if (!headers.get("origin").startsWith("http")){
