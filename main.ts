@@ -6,7 +6,7 @@ function addCorsIfNeeded(response: Response) {
 
   if (headers.has("origin")) {
     if (!headers.get("origin").startsWith("http")){
-      headers.set("origin", "http://localhost:0000")
+      headers.set("origin", "http://localhost:3000")
     }
   }
 
