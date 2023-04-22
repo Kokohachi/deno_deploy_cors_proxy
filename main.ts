@@ -4,12 +4,13 @@ import { CSS, render } from "https://deno.land/x/gfm@0.1.22/mod.ts";
 function addCorsIfNeeded(response: Response) {
   const headers = new Headers(response.headers);
 
-  if (headers.has("origin")) {
-    if (!headers.get("origin").startsWith("http")){
-      headers.set("origin", "http://localhost:3000")
-      console.log(`Change Origin to: ${headers.get("origin")}`)
-    }
-  }
+  console.log(`Origin: ${headers.get("origin")}`)
+
+  // if (headers.has("origin")) {
+  //   if (!headers.get("origin").startsWith("http")){
+  //     headers.set("origin", "http://localhost:3000")
+  //   }
+  // }
 
   if (!headers.has("access-control-allow-origin")) {
     headers.set("access-control-allow-origin", "*");
