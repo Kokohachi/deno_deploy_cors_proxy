@@ -60,8 +60,10 @@ async function handleRequest(request: Request) {
 
     const response = await fetch(url, req);
     const headers = addCorsIfNeeded(response);
-    let restxt = await response.text()
+    const blob = await response.blob()
+    let restxt = await new Response(blob).text()
     console.log(restxt)
+    console.log(black_list.map((item) => {return restxt.includes(item["before"])}).includes(true))
 
     if (black_list.map((item) => {return restxt.includes(item["before"])}).includes(true)) {
       black_list.map((item) => {
@@ -73,7 +75,7 @@ async function handleRequest(request: Request) {
         headers,
       });
     } else {
-      return new Response(restxt, {
+      return new Response(blob, {
         status: response.status,
         statusText: response.statusText,
         headers,
