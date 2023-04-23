@@ -3,8 +3,8 @@ import { CSS, render } from "https://deno.land/x/gfm@0.1.22/mod.ts";
 
 const black_list = [
   {
-    "before" :"/bin_index.95b70c8d",
-    "after": "https://gist.githubusercontent.com/fkunn1326/4ca403f66e1355fda9909f394eaa0699/raw/6b3e44f79e8242b8605506d12a5f33cb3ba8247f/gistfile1.txt"
+    "before" :"/bin_index",
+    "after": "https://fkunn1326-cors.deno.dev/https://w-corp.staticblitz.com/bin_index"
   },
   {
     "before": "https://w-corp.staticblitz.com/webcontainer",
@@ -56,12 +56,13 @@ async function handleRequest(request: Request) {
       req.headers.set("referer", "http://localhost:3000")
     }
 
+    req.headers.set("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36")
+
     console.log(`Origin: ${req.headers.get("origin")}`)
 
     const response = await fetch(url, req);
     const headers = addCorsIfNeeded(response);
     let restxt = await response.text()
-    console.log(black_list.map((item) => {return restxt.includes(item["before"])}).includes(true))
 
     if (black_list.map((item) => {return restxt.includes(item["before"])}).includes(true)) {
       black_list.map((item) => {
