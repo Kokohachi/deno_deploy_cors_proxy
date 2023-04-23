@@ -57,8 +57,9 @@ async function handleRequest(request: Request) {
     }
 
     req.headers.set("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36")
+    req.headers.set("host", "127.0.0.1:8000")
 
-    console.log(`Origin: ${req.headers.get("origin")}`)
+    console.log(req.headers)
 
     const response = await fetch(url, req);
     const headers = addCorsIfNeeded(response);
