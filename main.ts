@@ -5,6 +5,10 @@ const black_list = [
   {
     "before" :"/bin_index",
     "after": "https://fkunn1326-cors.deno.dev/https://w-corp.staticblitz.com/bin_index"
+  },
+  {
+    "before": "https://w-corp.staticblitz.com/webcontainer",
+    "after": "https://fkunn1326-cors.deno.dev/https://w-corp.staticblitz.com/webcontainer"
   }
 ]
 
