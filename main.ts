@@ -2,14 +2,14 @@ import { serve } from "https://deno.land/std@0.181.0/http/server.ts";
 import { CSS, render } from "https://deno.land/x/gfm@0.1.22/mod.ts";
 
 const black_list = [
-  {
-    "before" :"/bin_index",
-    "after": "https://fkunn1326-cors.deno.dev/https://w-corp.staticblitz.com/bin_index"
-  },
-  {
-    "before": "https://w-corp.staticblitz.com/webcontainer",
-    "after": "https://fkunn1326-cors.deno.dev/https://w-corp.staticblitz.com/webcontainer"
-  }
+  // {
+  //   "before" :"/bin_index",
+  //   "after": "http://127.0.0.1:8000/https://w-corp.staticblitz.com/bin_index"
+  // },
+  // {
+  //   "before": "https://w-corp.staticblitz.com/webcontainer",
+  //   "after": "http://127.0.0.1:8000/https://w-corp.staticblitz.com/webcontainer"
+  // }
 ]
 
 function addCorsIfNeeded(response: Response) {
@@ -55,11 +55,6 @@ async function handleRequest(request: Request) {
     if (!req.headers.get("referer")?.startsWith("http")){
       req.headers.set("referer", "http://localhost:3000")
     }
-
-    req.headers.set("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36")
-    req.headers.set("host", "127.0.0.1:8000")
-
-    console.log(req.headers)
 
     const response = await fetch(url, req);
     const headers = addCorsIfNeeded(response);
