@@ -63,7 +63,6 @@ async function handleRequest(request: Request) {
     const blob = await response.blob()
     let restxt = await new Response(blob).text()
     console.log(restxt)
-    console.log(black_list.map((item) => {return restxt.includes(item["before"])}).includes(true))
 
     if (black_list.map((item) => {return restxt.includes(item["before"])}).includes(true)) {
       black_list.map((item) => {
