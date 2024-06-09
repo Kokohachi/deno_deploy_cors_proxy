@@ -59,7 +59,10 @@ async function handleRequest(request: Request) {
     const response = await fetch(url, req);
     const headers = addCorsIfNeeded(response);
     let restxt = await response.text()
-
+    const urlPattern = /(https?:\/\/[^\s"']+\.(html|js))(?!.*\.(eot|ttf|woff|woff2))/gi;
+    restxt = restxt.replace(urlPattern, (match, p1) => {
+      return `https://useful-robin-10.deno.dev/${p1}`;
+    });
     if (black_list.map((item) => {return restxt.includes(item["before"])}).includes(true)) {
       black_list.map((item) => {
         restxt = restxt.replaceAll(item["before"], item["after"])
